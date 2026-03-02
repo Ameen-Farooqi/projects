@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import router from './src/route.mjs';
+import router from './src/route.mjs'
 import config from './config.mjs';
 //Change all the APi's based on your code
 const app = express();
