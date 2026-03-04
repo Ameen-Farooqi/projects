@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const reviewSchema = new mongoose.Schema({
+export const reviewSchema = new mongoose.Schema({
     bookId: {
         type: mongoose.Types.ObjectId,
         required: [true, 'Book ID is mandatory'],

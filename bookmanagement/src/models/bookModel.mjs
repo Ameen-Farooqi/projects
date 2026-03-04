@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { reviewSchema } from "./reviewModel.mjs";
 const bookSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -36,6 +37,10 @@ const bookSchema = new mongoose.Schema({
         type: Number,
         default: 0
         // Comment: Holds number of reviews of this book
+    },
+    reviewsData : {
+      type : [reviewSchema],
+      default : []
     },
     isDeleted: {
         type: Boolean,
