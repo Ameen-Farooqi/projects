@@ -1,6 +1,7 @@
 import bookModel from "../models/bookModel.mjs";
 import userModel from "../models/userModel.mjs";
 import mongoose from "mongoose";
+import { uploadFileToS3 } from "../aws/uploadFile.mjs";
 
 const createBook = async (req, res) => {
   try {
@@ -60,7 +61,7 @@ const createBook = async (req, res) => {
       return res.status(400).send({ status: false, message: "ISBN already exists" });
     }
 
-    // 6. Create book
+    // 6. Prepare book payload
     const bookData = {
       title,
       excerpt,
@@ -70,6 +71,20 @@ const createBook = async (req, res) => {
       subcategory,
       releasedAt,
     };
+
+    // 6.1 If a cover image file is provided, upload to S3
+    if (req.file) {
+      try {
+        const imageUrl = await uploadFileToS3(req.file);
+        bookData.imageCover = imageUrl;
+      } catch (uploadErr) {
+        return res.status(500).send({
+          status: false,
+          message: "Failed to upload image to S3",
+          error: uploadErr.message,
+        });
+      }
+    }
 
     const book = await bookModel.create(bookData);
 

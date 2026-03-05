@@ -38,6 +38,11 @@ const bookSchema = new mongoose.Schema({
         default: 0
         // Comment: Holds number of reviews of this book
     },
+    imageCover: {
+        type: String,
+        trim: true
+        // Comment: Stores public URL of the book cover image
+    },
     reviewsData : {
       type : [reviewSchema],
       default : []
