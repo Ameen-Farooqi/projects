@@ -71,7 +71,7 @@ example of a query url: blogs?filtername=filtervalue&f2=fv2
 - Use a middleware for authentication purpose.
 
 ### Authorisation
-- Make sure that only the owner of the blogs is able to edit or delete the blog.
+- Make sure that only the owner of the blogs is able to edit or delete the blog ( no need to add authorisation for delete by query params).
 - In case of unauthorized access return an appropirate error message.
 
 ## Testing (Self-evaluation During Development)

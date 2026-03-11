@@ -2,7 +2,13 @@
   "name": "miniboggingsite",
   "version": "1.0.0",
   "description": "this is the backend for mini blogging site",
-  "keywords": ["mini", "blogging", "site", "tech", "blog"],
+  "keywords": [
+    "mini",
+    "blogging",
+    "site",
+    "tech",
+    "blog"
+  ],
   "license": "ISC",
   "author": "FSD class",
   "type": "module",
@@ -15,8 +21,10 @@
     "node": "18.x"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.2.1"
   }
 }
