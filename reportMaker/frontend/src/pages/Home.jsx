@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import styles from './Home.module.css'
 import Navbar from '../components/nav/Navbar.jsx'
 import { useNavigate } from 'react-router-dom'
+import Reports from '../components/reports/Reports.jsx'
 export default function Home() {
   const navigate = useNavigate()
   const [user, setUser] = useState(null)
@@ -15,10 +16,8 @@ export default function Home() {
   }, [])
   return (
     <>
-    <Navbar />
-    <div className={styles.home}>
-        <h1>Home</h1>
-    </div>
+    {/* <Navbar /> */}
+    <Reports />
     </>
   )
 }

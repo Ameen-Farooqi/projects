@@ -1,6 +1,15 @@
 import mongoose from "mongoose";
 const reportSchema = new mongoose.Schema({
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    taskTitle:{
+        type: String,
+        required: true,
+        default: "Untitled task"
+    },
+    adminInstructions:{
+        type: String,
+        default: ""
+    },
     propertyType:{
         type: String,
         required: true,
@@ -10,17 +19,16 @@ const reportSchema = new mongoose.Schema({
     address:{
         type: String,
         required: true,
-        default: "No address provided"
+        default: "To be confirmed on site"
     },
     images:{
         type: [String],
-        required: true,
+        // required: true,
         default: []
     },
     description:{
         type: String,
-        required: true,
-        default: "No description provided"
+        default: ""
     },
     assignedTo:{
         type:String,

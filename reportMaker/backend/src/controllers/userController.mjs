@@ -30,9 +30,15 @@ const loginUser = async (req, res) => {
      if(!isPasswordCorrect){
         return res.status(400).send({ message: "Invalid password" });
      }
-     const token = jwt.sign({ userId: user._id, role: user.role }, config.secretMessage, { expiresIn: "24h" });
+     const token = jwt.sign(
+       { userId: user._id.toString(), role: user.role },
+       config.secretMessage,
+       { expiresIn: "24h" }
+     );
      res.setHeader("Authorization", `Bearer ${token}`);
-     return res.status(200).send({ message: "Login successful", user });
+     const safeUser = user.toObject();
+     delete safeUser.password;
+     return res.status(200).send({ message: "Login successful", user: safeUser, token });
    } catch (error) {
      return res.status(500).send({ message: "Internal server error" });
    }
@@ -41,7 +47,13 @@ const loginUser = async (req, res) => {
 const getUser = async (req, res) => {
    try {
      const { userId } = req.params;
-     const user = await userModel.findById(userId);
+     if (req.user.userId !== userId && req.user.role !== "admin") {
+        return res.status(403).send({ message: "Forbidden" });
+     }
+     const user = await userModel.findById(userId).select("-password").lean();
+     if (!user) {
+        return res.status(400).send({ message: "User not found" });
+     }
      return res.status(200).send({ message: "User found", user });
    } catch (error) {
      return res.status(500).send({ message: "Internal server error" });
