@@ -18,11 +18,8 @@ function navItemsForUser() {
   }
   if (user?.role === 'admin') {
     return [
-      baseItems[0],
-      baseItems[1],
-      baseItems[2],
+      ...baseItems,
       { name: 'Create task', path: '/reports/create' },
-      baseItems[3],
     ]
   }
   return baseItems
@@ -77,7 +74,6 @@ export default function Navbar() {
     <header className={styles.navbar}>
       <div className={styles.inner}>
         <Link to="/" className={styles.brand} aria-label="Home">
-          {/* <span className={styles.logoMark} aria-hidden /> */}
           <span className={styles.brandText}>ReportMaker</span>
         </Link>
 
